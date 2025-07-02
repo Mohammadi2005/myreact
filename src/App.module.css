@@ -5,12 +5,12 @@
   text-align: center;
   color: rebeccapurple;
 }
-.x{
-  color: #282c34;
-  font-size: 50px;
+.noCompleted{
+  color: #ab2020;
+  font-size: 20px;
 }
-.y{
-  color: #f05000;
+.yesCompleted{
+  color: #4cbd06;
   font-size: 20px;
 }
 

@@ -1,52 +1,52 @@
 import style from './App.module.css';
 import {useState} from 'react'
+import {ShowCourse} from './components/Course';
+// import * as events from "node:events";
+var id = 0
 
 function App() {
-    const [age, setAge] = useState(0);
-    const increaseAge = () => {
-        setAge(age + 1);
+    const [courses, setCourses] = useState([])
+    const [newCourse, setNewCourse] = useState({})
+
+    const addCourse = () => {
+        setCourses([...courses , {name: newCourse, id: id++, completed: false}])
     }
-    const [input, setInput] = useState("hello");
-    const changeInput = (event) => {
-        setInput(event.target.value);
-        console.log(event);
+    const removeCourse = (curId) => {
+        setCourses(courses.filter(course => course.id !== curId))
     }
-    const [tag, setTag] = useState(false);
-    const changeTag = () => {
-        setTag(!tag);
+    const completeCourse = (curId) => {
+        const newCourses = courses.map((course) => {
+            if(curId === course.id) {
+                return {...course, completed: true}
+            }
+            return course
+        })
+        setCourses(newCourses)
     }
-    const [color, setColor] = useState("red");
-    const changeColor = () => {
-        setColor(color == "green" ? "red" : "green");
+    const setNC = (event) => {
+        setNewCourse(event.target.value)
     }
-    const [count, setCount] = useState(0);
 
     return (
-
-    <div className={style.myStyle}>    {/* add css to tag */}
-        <h2>{age}</h2>
-        <button onClick={increaseAge}>Increase age</button>
-        {/*<button onClick={() => setAge(age + 1)}>Increase age</button>*/}
-        <button onClick={() => setAge(age - 1)}>Decrease age</button>
-        <br/>--------------------------<br/>
-        <input type="text" onChange={changeInput} />
-        <p>{input}</p>
-        <br/>--------------------------<br/>
-        <button onClick={changeTag}> change </button>
-        <h2 hidden={tag}>Amir Hossein Mohammadi</h2>
-        {!tag && <h2>Amir Hossein</h2>}
-        <br/>--------------------------<br/>
-        <button onClick={changeColor}> change color</button>
-        <h2 style={{ color : color }}>Amir Hossein Mohammadi</h2>
-        <br/>--------------------------<br/>
-        <h2>{count}</h2>
-        <button onClick={() => {setCount(count + 1)}}> increase</button>
-        <button onClick={() => {setCount(count - 1)}}> decrease</button>
-        <button onClick={() => {setCount(0)}}> set to 0</button>
-
-
+    <div className={style.myStyle}>
+        <div>
+            <input type="text" onChange={(e) => setNC(e)}/>
+            <button type="submit" onClick={addCourse}>Add Cours</button>
+        </div>
+        {/*<div>*/}
+        {/*    {courses.map((course) => {*/}
+        {/*        return (*/}
+        {/*            <div key={`div-${course.id}`}>*/}
+        {/*                <h2 key={`h2-${course.id}`}>{course.name} - {course.id}</h2>*/}
+        {/*                <button key={`btn-${course.id}`} onClick={() => removeCourse(course.id)}>Remove Course</button>*/}
+        {/*            </div>*/}
+        {/*        )*/}
+        {/*    })}*/}
+        {/*</div>*/}
+        <ShowCourse courses={courses} removeCourse={removeCourse} completeCourse={completeCourse}/>
     </div>
 )
 }
+
 
 export default App;
