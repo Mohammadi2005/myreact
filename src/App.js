@@ -7,6 +7,9 @@ import {Nav} from "./components/Pages/nav";
 import Home from "./components/Pages/Home";
 import Contact from "./components/Pages/Contact";
 import {Error404} from "./components/Pages/Error404";
+import {createContext} from "react"
+
+export const ProfileContent = createContext();
 
 
 function App() {
@@ -14,17 +17,18 @@ function App() {
 
     return (
         <div className={style.App}>
+            <ProfileContent value={{username, setUserName}}>
             <Router>
                 <Nav/>
                 <Routes>
-                    <Route path="/" element={<Home username={username} />}/>
+                    <Route path="/" element={<Home />}/>
                     <Route path="/about" element={<About />}/>
                     <Route path="/contact" element={<Contact/>}/>
-                    <Route path="/profile" element={<Profile
-                        username={username} setUserName={setUserName} />}/>
+                    <Route path="/profile" element={<Profile/>}/>
                     <Route path="*" element={<Error404/>}/>
                 </Routes>
             </Router>
+            </ProfileContent>
         </div>
     );
 }

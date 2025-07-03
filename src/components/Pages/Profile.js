@@ -1,23 +1,25 @@
 import {useParams} from "react-router-dom"
-import {useState} from "react";
+import {useState, useContext} from "react";
+import {ProfileContent} from "../../App";
 
-function Profile(props) {
-    const {name} = useParams()
+function Profile() {
+    const {username} = useContext(ProfileContent)
     return (
         <div>
-            <h1>this is profile of - {props.username}</h1>
-            <ChangeProfile setUserName={props.setUserName}/>
+            <h1>this is profile of - {username}</h1>
+            <ChangeProfile/>
         </div>
     )
 }
 export default Profile
 
-const ChangeProfile = (props) => {
+const ChangeProfile = () => {
     const [newName, setNewName] = useState('')
+    const {setUserName} = useContext(ProfileContent)
     return (
         <div>
             <input onChange={(e) => setNewName(e.target.value)} />
-            <button onClick={() => props.setUserName(newName)}>Change Profile</button>
+            <button onClick={() => setUserName(newName)}>Change Profile</button>
         </div>
     )
 }
