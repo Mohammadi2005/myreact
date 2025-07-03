@@ -1,7 +1,7 @@
-function Home(){
+function Home(props){
     return (
         <div style={{color:"#622444", textAlign:"center"}}>
-            <h1>this id home page</h1>
+            <h1>this id home page - {props.username}</h1>
         </div>
     )
 }
