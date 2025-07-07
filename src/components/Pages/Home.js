@@ -1,11 +1,23 @@
-import {ProfileContent} from "../../App";
-import {useContext} from "react";
+import {useQuery} from "@tanstack/react-query"
+import axios from "axios";
 
 function Home(){
-    const {username} = useContext(ProfileContent)
+    const {data, isLoading, isError, error, refetch} = useQuery({
+        queryKey: "cat",
+        queryFn: () => {
+            return axios.get("https://catfact.ninja/fact").then(res => res.data)
+        }
+    })
+    if (isLoading){
+        return <h3>Loading...</h3>
+    }
+    if (isError){
+        return <h3>Error : {error.message}</h3>
+    }
     return (
-        <div style={{color:"#622444", textAlign:"center"}}>
-            <h1>this id home page - {username}</h1>
+        <div>
+            <h1>{data?.fact}</h1>
+            <button onClick={() => refetch()}>Refresh</button>
         </div>
     )
 }

@@ -15,11 +15,11 @@ export default Profile
 
 const ChangeProfile = () => {
     const [newName, setNewName] = useState('')
-    const {setUserName} = useContext(ProfileContent)
+    const {setUsername} = useContext(ProfileContent)
     return (
         <div>
             <input onChange={(e) => setNewName(e.target.value)} />
-            <button onClick={() => setUserName(newName)}>Change Profile</button>
+            <button onClick={() => setUsername(newName)}>Change Profile</button>
         </div>
     )
 }
