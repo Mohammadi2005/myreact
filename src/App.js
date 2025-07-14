@@ -6,8 +6,8 @@ import {store} from "./Redux/Store";
 import {Provider} from "react-redux";
 import {Link, Routes, Route, BrowserRouter as Router} from "react-router-dom";
 
-
 function App() {
+
 
     return (
         <div className={style.App}>
@@ -24,8 +24,9 @@ function App() {
                 </Router>
             </Provider>
 
+
         </div>
     );
-}
+} 
 
 export default App;
