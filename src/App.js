@@ -1,32 +1,14 @@
 import style from './App.module.css';
-import {Login} from "./Redux/Login";
-import {Home} from "./Redux/Home";
-import {Contact} from "./Redux/Contact";
-import {store} from "./Redux/Store";
-import {Provider} from "react-redux";
-import {Link, Routes, Route, BrowserRouter as Router} from "react-router-dom";
+import {Person} from "./propsType/Person";
+
 
 function App() {
 
-
     return (
-        <div className={style.App}>
-            <Provider store={store}>
-                <Router>
-                    <Link to="/" style={{padding: "10px"}}>Home</Link>
-                    <Link to="/login" style={{padding: "10px"}}>Login</Link>
-                    <Link to="/contact" style={{padding: "10px"}}>Contact</Link>
-                    <Routes>
-                        <Route path="/" element={<Home/>} />
-                        <Route path="/login" element={<Login/>} />
-                        <Route path="/contact" element={<Contact/>} />
-                    </Routes>
-                </Router>
-            </Provider>
-
-
+        <div className={style.myStyle} >
+            <Person name={"ali"} email={"ali@gmail.com"} age={20} isMarried={true} courses={["C", "C++", "java", "css"]}/>
         </div>
     );
-} 
+}
 
 export default App;
